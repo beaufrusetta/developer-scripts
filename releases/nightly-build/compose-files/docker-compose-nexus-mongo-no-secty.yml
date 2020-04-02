@@ -43,7 +43,7 @@ volumes:
 
 services:
   volume:
-    image: nexus3.edgexfoundry.org:10004/docker-edgex-volume:master
+    image: edgexfoundry/docker-edgex-volume:0.0.0
     container_name: edgex-files
     networks:
       - edgex-network
@@ -54,7 +54,7 @@ services:
       - consul-data:/consul/data:z
 
   consul:
-    image: consul:1.3.1
+    image: edgexfoundry/docker-edgex-consul:0.0.0
     ports:
       - "8400:8400"
       - "8500:8500"
@@ -64,6 +64,7 @@ services:
       edgex-network:
         aliases:
             - edgex-core-consul
+    command: [ "agent", "-ui", "-bootstrap", "-server", "-client", "0.0.0.0", "-config-dir", "/consul/config/non-secure" ]
     volumes:
       - consul-config:/consul/config:z
       - consul-data:/consul/data:z
