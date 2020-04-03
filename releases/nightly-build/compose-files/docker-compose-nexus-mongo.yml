@@ -64,13 +64,12 @@ services:
     hostname: edgex-core-consul
     environment:
       - "SECRETSTORE_SETUP_DONE_FLAG=/tmp/edgex/secrets/edgex-consul/.secretstore-setup-done"
+      - EDGEX_DB=mongo
+      - EDGEX_SECURE=true
     networks:
       edgex-network:
         aliases:
             - edgex-core-consul
-    environment:
-      - EDGEX_DB=mongo
-      - EDGEX_SECURE=true
     volumes:
       - consul-config:/consul/config:z
       - consul-data:/consul/data:z
