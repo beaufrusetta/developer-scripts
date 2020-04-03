@@ -68,7 +68,9 @@ services:
       edgex-network:
         aliases:
             - edgex-core-consul
-    command: [ "agent", "-ui", "-bootstrap", "-server", "-client", "0.0.0.0", "-config-dir", "/consul/config/secure" ]
+    environment:
+      - EDGEX_DB=mongo
+      - EDGEX_SECURE=true
     volumes:
       - consul-config:/consul/config:z
       - consul-data:/consul/data:z

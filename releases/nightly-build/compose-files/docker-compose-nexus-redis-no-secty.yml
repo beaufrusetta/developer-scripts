@@ -60,7 +60,9 @@ services:
       edgex-network:
         aliases:
             - edgex-core-consul
-    command: [ "agent", "-ui", "-bootstrap", "-server", "-client", "0.0.0.0", "-config-dir", "/consul/config/non-secure" ]
+    environment:
+      - EDGEX_DB=redis
+      - EDGEX_SECURE=false
     volumes:
       - log-data:/edgex/logs:z
       - consul-config:/consul/config:z
